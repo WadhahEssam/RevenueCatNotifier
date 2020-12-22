@@ -10,21 +10,38 @@
         android:layout_height="wrap_content"
         android:text="@string/other_language"
         android:id="@+id/button_change_language"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="16dp"
         android:textSize="16dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:textColor="@color/primary"/>
 
-    <TextView
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:src="@drawable/revenue_cat_logo"
         android:layout_below="@id/button_change_language"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/image_revenue_cat_logo"
+        />
+
+    <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/login"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"
-        android:textSize="16dp"
-        android:theme="@style/Bold"
-        android:textColor="@color/primary"/>
+        android:layout_height="110dp"
+        android:src="@drawable/triangle"
+        android:layout_below="@id/image_revenue_cat_logo"
+        android:id="@+id/triangle"
+        />
+
+    <RelativeLayout
+        android:id="@+id/text_message"
+        android:layout_width="match_parent"
+        android:layout_height="800dp"
+        android:layout_below="@id/triangle"
+        android:layout_marginTop="-10dp"
+        android:background="@drawable/bg_triangle">
+
+    </RelativeLayout>
 
 </RelativeLayout>

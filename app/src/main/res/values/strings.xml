@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">RevenueCatNotifier</string>
+    <string name="app_name">RevenueCat Notifier</string>
+    <string name="other_language">عربي</string>
+    <string name="login">Log in</string>
 </resources>

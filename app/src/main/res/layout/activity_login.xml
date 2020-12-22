@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_gravity="start">
-    <Button
-        android:id="@+id/button_change_language"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/other_language" />
 
-    <Button
-        android:id="@+id/button_login"
+    <TextView
+        android:layout_alignParentLeft="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/other_language"
+        android:id="@+id/button_change_language"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:textSize="16dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textColor="@color/primary"/>
+
+    <TextView
         android:layout_below="@id/button_change_language"
-        android:text="@string/login" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:textSize="16dp"
+        android:theme="@style/Bold"
+        android:textColor="@color/primary"/>
+
 </RelativeLayout>

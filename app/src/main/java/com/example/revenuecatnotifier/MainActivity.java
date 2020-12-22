@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         changeLanguageButton = findViewById(R.id.button_change_language);
         getWindow().getDecorView().setLayoutDirection(getCurrentLanguage() == "ar" ? View.LAYOUT_DIRECTION_LTR : View.LAYOUT_DIRECTION_RTL);
 
+
         changeLanguageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

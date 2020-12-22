@@ -13,4 +13,16 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Regular">
+        <item name="android:fontFamily">@font/open_sans_regular</item>
+    </style>
+
+    <style name="SemiBold">
+        <item name="android:fontFamily">@font/open_sans_semi_bold</item>
+    </style>
+
+    <style name="Bold">
+        <item name="android:fontFamily">@font/open_sans_bold</item>
+    </style>
 </resources>

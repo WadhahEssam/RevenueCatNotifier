@@ -4,4 +4,6 @@
     <string name="other_language">English</string>
     <string name="login">تسجيل دخول</string>
     <string name="login_warning">التطبيق ليس مصرح من الشركة الأم, استخدامه على مسؤوليتك الشخصية</string>
+    <string name="login_email">البريد الإلكتروني</string>
+    <string name="login_password">كلمة المرور</string>
 </resources>

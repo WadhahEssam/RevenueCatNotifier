@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="start">
 
     <TextView
@@ -40,6 +41,7 @@
         android:background="@drawable/bg_rectangle">
 
         <LinearLayout
+            android:id="@+id/view_login_warning"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -64,10 +66,77 @@
                 android:text="@string/login_warning"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:theme="@style/Regular"
-                android:textSize="12dp"/>
+                android:textSize="12dp"
+                android:theme="@style/Regular" />
 
         </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view_login_warning"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_text_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:elegantTextHeight="true"
+                android:hint="@string/login_email"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:layout_marginHorizontal="48dp"
+                android:theme="@style/Regular" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_text_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:elegantTextHeight="true"
+                android:hint="@string/login_password"
+                android:inputType="textWebPassword"
+                android:textAlignment="viewStart"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:layout_marginHorizontal="48dp"
+                android:theme="@style/Regular" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/button_drop_shadow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_login_button"
+                android:text="@string/login"
+                android:textAllCaps="false"
+                android:textColor="@color/primary"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="5dp"
+                android:outlineSpotShadowColor="@color/white"
+                app:cardPreventCornerOverlap="true"
+                android:layout_marginHorizontal="48dp"
+                android:layout_marginBottom="30dp">
+
+                <android.widget.Button
+                    android:textSize="16dp"
+                    android:id="@+id/button_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_login_button"
+                    android:text="@string/login"
+                    android:textAllCaps="false"
+                    android:textColor="@color/primary"
+                    android:theme="@style/Bold" />
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
     </RelativeLayout>
 
 </RelativeLayout>

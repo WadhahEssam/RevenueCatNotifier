@@ -3,4 +3,6 @@
     <string name="other_language">عربي</string>
     <string name="login">Log in</string>
     <string name="login_warning">This is not an official revenue cat product instead, web scraping is used to collect the data</string>
+    <string name="login_email">Email</string>
+    <string name="login_password">Password</string>
 </resources>

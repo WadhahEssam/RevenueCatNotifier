@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="start">
 
     <TextView
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="48dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/bg_login_warning"
             android:gravity="center"
             android:orientation="vertical"
@@ -76,26 +76,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/view_login_warning"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="22dp"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edit_text_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="48dp"
                 android:backgroundTint="@color/white"
                 android:elegantTextHeight="true"
                 android:hint="@string/login_email"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
-                android:layout_marginHorizontal="48dp"
+                android:textSize="16dp"
                 android:theme="@style/Regular" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edit_text_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="48dp"
                 android:backgroundTint="@color/white"
                 android:elegantTextHeight="true"
                 android:hint="@string/login_password"
@@ -103,27 +105,26 @@
                 android:textAlignment="viewStart"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
-                android:layout_marginHorizontal="48dp"
+                android:textSize="16dp"
                 android:theme="@style/Regular" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/button_drop_shadow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="48dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/bg_login_button"
+                android:outlineSpotShadowColor="@color/white"
                 android:text="@string/login"
                 android:textAllCaps="false"
                 android:textColor="@color/primary"
                 app:cardCornerRadius="6dp"
                 app:cardElevation="5dp"
-                android:outlineSpotShadowColor="@color/white"
-                app:cardPreventCornerOverlap="true"
-                android:layout_marginHorizontal="48dp"
-                android:layout_marginBottom="30dp">
+                app:cardPreventCornerOverlap="true">
 
                 <android.widget.Button
-                    android:textSize="16dp"
                     android:id="@+id/button_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -131,12 +132,24 @@
                     android:text="@string/login"
                     android:textAllCaps="false"
                     android:textColor="@color/primary"
+                    android:textSize="16dp"
                     android:theme="@style/Bold" />
 
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 
+
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/button_github_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/github_icon"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="12dp"
+        android:alpha="0.7"/>
 
 </RelativeLayout>

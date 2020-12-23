@@ -5,43 +5,69 @@
     android:layout_gravity="start">
 
     <TextView
-        android:layout_alignParentLeft="true"
+        android:id="@+id/button_change_language"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/other_language"
-        android:id="@+id/button_change_language"
-        android:layout_marginTop="12dp"
+        android:layout_alignParentLeft="true"
         android:layout_marginLeft="16dp"
-        android:textSize="16dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/open_sans_semi_bold"
-        android:textColor="@color/primary"/>
+        android:text="@string/other_language"
+        android:textColor="@color/primary"
+        android:textSize="16dp" />
 
     <ImageView
+        android:id="@+id/image_revenue_cat_logo"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:src="@drawable/revenue_cat_logo"
         android:layout_below="@id/button_change_language"
         android:layout_marginTop="80dp"
         android:layout_marginBottom="20dp"
-        android:id="@+id/image_revenue_cat_logo"
-        />
+        android:src="@drawable/revenue_cat_logo" />
 
     <ImageView
+        android:id="@+id/triangle"
         android:layout_width="wrap_content"
         android:layout_height="110dp"
-        android:src="@drawable/triangle"
         android:layout_below="@id/image_revenue_cat_logo"
-        android:id="@+id/triangle"
-        />
+        android:src="@drawable/triangle" />
 
     <RelativeLayout
-        android:id="@+id/text_message"
         android:layout_width="match_parent"
         android:layout_height="800dp"
         android:layout_below="@id/triangle"
-        android:layout_marginTop="-11dp"
+        android:layout_marginTop="-13dp"
         android:background="@drawable/bg_rectangle">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="48dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/bg_login_warning"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="12dp">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:alpha="@android:integer/config_shortAnimTime"
+                android:src="@drawable/warning_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/login_warning"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:theme="@style/Regular"
+                android:textSize="12dp"/>
+
+        </LinearLayout>
     </RelativeLayout>
 
 </RelativeLayout>

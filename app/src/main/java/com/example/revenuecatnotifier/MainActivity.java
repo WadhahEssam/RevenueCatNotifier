@@ -10,36 +10,97 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView changeLanguageButton;
+    private Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
+        registerElements();
+        setLayoutDirection();
 
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Starting the api call");
+                RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
+                final String url = "https://fadfadah.net/ksu-gpa/getRevenueCatInformation2";
 
-        changeLanguageButton = findViewById(R.id.button_change_language);
-        getWindow().getDecorView().setLayoutDirection(getCurrentLanguage() == "ar" ? View.LAYOUT_DIRECTION_LTR : View.LAYOUT_DIRECTION_RTL);
+                Map<String, String> postParam= new HashMap<String, String>();
+                postParam.put("email", "fadfadahChat@gmail.com");
+                postParam.put("password", "12345");
+                postParam.put("hash", "AwzXlHcpcv-FW7aEyA2Idfadfadah_199_1w_3d0$2.13aPXogm9czt-zHKEZjELznfadfadah_499_1m_1w0TrialFdOl66zFy0-jNGcL4eDbcfadfadah_199_1w_3d0Trial");
 
+                JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(postParam),
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                try {
+                                    Log.e(" result", (String.valueOf(response)));
+                                    System.out.println(String.valueOf(response.get("generalStats")));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+
+                            }
+                        }
+                );
+                requestQueue.add(getRequest);
+            }
+        });
 
         changeLanguageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("hello there");
                 switchLanguage();
             }
         });
+    }
+
+    private void setLayoutDirection() {
+        getWindow().getDecorView().setLayoutDirection(getCurrentLanguage() == "ar" ? View.LAYOUT_DIRECTION_LTR : View.LAYOUT_DIRECTION_RTL);
+    }
+
+    private void registerElements() {
+        changeLanguageButton = findViewById(R.id.button_change_language);
+        loginButton = findViewById(R.id.button_login);
     }
 
     public String getCurrentLanguage() {

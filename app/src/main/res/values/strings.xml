@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">RevenueCat Notifier</string>
+    <string name="api_url">https://fadfadah.net/ksu-gpa/getRevenueCatInformation2</string>
     <string name="other_language">عربي</string>
     <string name="login">Log in</string>
     <string name="login_warning">This is not an official revenue cat product instead, web scraping is used to collect the data</string>
     <string name="login_email">Email</string>
     <string name="login_password">Password</string>
     <string name="login_loading">Please wait until we finish gathering data</string>
+    <string name="login_error_empty_fields">Please fill email and password</string>
 </resources>

@@ -90,12 +90,12 @@ public class MainActivity extends AppCompatActivity {
                 String password = passwordTextEdit.getText().toString();
 
                 if (email.equals("") || password.equals("")) {
-                    loginError("Please make sure to fill your email and password");
+                    loginError(getResources().getString(R.string.login_error_empty_fields));
                 } else {
                     loginFormView.setVisibility(View.INVISIBLE);
                     loginWarningView.setVisibility(View.INVISIBLE);
                     loginWaitingView.setVisibility(View.VISIBLE);
-                    loginRequest("fadfadahChat@gmail.com", "12345");
+                    loginRequest(email, password);
                 }
             }
         });
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setLayoutDirection() {
-        getWindow().getDecorView().setLayoutDirection(getCurrentLanguage() == "ar" ? View.LAYOUT_DIRECTION_LTR : View.LAYOUT_DIRECTION_RTL);
+        getWindow().getDecorView().setLayoutDirection(getCurrentLanguage().equals("ar") ? View.LAYOUT_DIRECTION_LTR : View.LAYOUT_DIRECTION_RTL);
     }
 
     private void registerElements() {

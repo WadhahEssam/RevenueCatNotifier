@@ -10,8 +10,10 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout loginWarningView;
     private LinearLayout loginFormView;
     private LinearLayout loginWaitingView;
+    private EditText emailTextEdit;
+    private EditText passwordTextEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,43 +46,57 @@ public class MainActivity extends AppCompatActivity {
         registerListeners();
     }
 
+    private void loginRequest(String email, String password) {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("email", email);
+        params.put("password", password);
+
+        final String url = "https://fadfadah.net/ksu-gpa/getRevenueCatInformation2";
+
+        CustomRequest.request(MainActivity.this, Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    loginFormView.setVisibility(View.VISIBLE);
+                    loginWarningView.setVisibility(View.VISIBLE);
+                    loginWaitingView.setVisibility(View.INVISIBLE);
+
+                    Log.e(" result", (String.valueOf(response)));
+                    System.out.println(String.valueOf(response.get("generalStats")));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loginError("Please make sure to fill your email and password");
+            }
+        });
+    }
+
+    private void loginError(String errorMessage) {
+        Toast.makeText(MainActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+        loginFormView.setVisibility(View.VISIBLE);
+        loginWarningView.setVisibility(View.VISIBLE);
+        loginWaitingView.setVisibility(View.INVISIBLE);
+    }
+
     private void registerListeners() {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Starting the api call");
-                loginFormView.setVisibility(View.INVISIBLE);
-                loginWarningView.setVisibility(View.INVISIBLE);
-                loginWaitingView.setVisibility(View.VISIBLE);
-                final String url = "https://fadfadah.net/ksu-gpa/getRevenueCatInformation2";
+                String email = emailTextEdit.getText().toString();
+                String password = passwordTextEdit.getText().toString();
 
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("email", "fadfadahChat@gmail.com");
-                params.put("password", "12345");
-                params.put("hash", "AwzXlHcpcv-FW7aEyA2Idfadfadah_199_1w_3d0$2.13aPXogm9czt-zHKEZjELznfadfadah_499_1m_1w0TrialFdOl66zFy0-jNGcL4eDbcfadfadah_199_1w_3d0Trial");
-
-                CustomRequest.request(MainActivity.this, Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            loginFormView.setVisibility(View.VISIBLE);
-                            loginWarningView.setVisibility(View.VISIBLE);
-                            loginWaitingView.setVisibility(View.INVISIBLE);
-
-                            Log.e(" result", (String.valueOf(response)));
-                            System.out.println(String.valueOf(response.get("generalStats")));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        loginFormView.setVisibility(View.VISIBLE);
-                        loginWarningView.setVisibility(View.VISIBLE);
-                        loginWaitingView.setVisibility(View.INVISIBLE);
-                    }
-                });
+                if (email.equals("") || password.equals("")) {
+                    loginError("Please make sure to fill your email and password");
+                } else {
+                    loginFormView.setVisibility(View.INVISIBLE);
+                    loginWarningView.setVisibility(View.INVISIBLE);
+                    loginWaitingView.setVisibility(View.VISIBLE);
+                    loginRequest("fadfadahChat@gmail.com", "12345");
+                }
             }
         });
 
@@ -101,6 +119,8 @@ public class MainActivity extends AppCompatActivity {
         loginFormView = findViewById(R.id.view_login_form);
         loginWaitingView = findViewById(R.id.view_login_loading);
         loginWaitingView.setVisibility(View.INVISIBLE);
+        emailTextEdit = findViewById(R.id.edit_text_email);
+        passwordTextEdit = findViewById(R.id.edit_text_password);
     }
 
     public String getCurrentLanguage() {

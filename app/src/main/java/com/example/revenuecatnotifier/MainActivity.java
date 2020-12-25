@@ -55,34 +55,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 System.out.println("Starting the api call");
-                RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
                 final String url = "https://fadfadah.net/ksu-gpa/getRevenueCatInformation2";
 
-                Map<String, String> postParam= new HashMap<String, String>();
-                postParam.put("email", "fadfadahChat@gmail.com");
-                postParam.put("password", "12345");
-                postParam.put("hash", "AwzXlHcpcv-FW7aEyA2Idfadfadah_199_1w_3d0$2.13aPXogm9czt-zHKEZjELznfadfadah_499_1m_1w0TrialFdOl66zFy0-jNGcL4eDbcfadfadah_199_1w_3d0Trial");
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email", "fadfadahChat@gmail.com");
+                params.put("password", "12345");
+                params.put("hash", "AwzXlHcpcv-FW7aEyA2Idfadfadah_199_1w_3d0$2.13aPXogm9czt-zHKEZjELznfadfadah_499_1m_1w0TrialFdOl66zFy0-jNGcL4eDbcfadfadah_199_1w_3d0Trial");
 
-                JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(postParam),
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                try {
-                                    Log.e(" result", (String.valueOf(response)));
-                                    System.out.println(String.valueOf(response.get("generalStats")));
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-
-                            }
+                CustomRequest.request(MainActivity.this, Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Log.e(" result", (String.valueOf(response)));
+                            System.out.println(String.valueOf(response.get("generalStats")));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                );
-                requestQueue.add(getRequest);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
             }
         });
 

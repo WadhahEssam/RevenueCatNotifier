@@ -41,6 +41,34 @@
         android:background="@drawable/bg_rectangle">
 
         <LinearLayout
+            android:id="@+id/view_login_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="48dp"
+            android:layout_marginTop="80dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="12dp">
+
+            <ProgressBar
+                android:id="@+id/indeterminateBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminateTint="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/login_loading"
+                android:textColor="@color/white"
+                android:theme="@style/Regular" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/view_login_warning"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,8 +99,8 @@
 
         </LinearLayout>
 
-
         <LinearLayout
+            android:id="@+id/view_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/view_login_warning"
@@ -146,10 +174,10 @@
         android:id="@+id/button_github_icon"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:src="@drawable/github_icon"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="12dp"
-        android:alpha="0.7"/>
+        android:alpha="0.7"
+        android:src="@drawable/github_icon" />
 
 </RelativeLayout>

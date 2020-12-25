@@ -5,4 +5,5 @@
     <string name="login_warning">This is not an official revenue cat product instead, web scraping is used to collect the data</string>
     <string name="login_email">Email</string>
     <string name="login_password">Password</string>
+    <string name="login_loading">Please wait until we finish gathering data</string>
 </resources>

@@ -1,39 +1,25 @@
 package com.example.revenuecatnotifier;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.ViewCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -42,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView changeLanguageButton;
     private Button loginButton;
+    private LinearLayout loginWarningView;
+    private LinearLayout loginFormView;
+    private LinearLayout loginWaitingView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +39,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         registerElements();
         setLayoutDirection();
+        registerListeners();
+    }
 
+    private void registerListeners() {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 System.out.println("Starting the api call");
+                loginFormView.setVisibility(View.INVISIBLE);
+                loginWarningView.setVisibility(View.INVISIBLE);
+                loginWaitingView.setVisibility(View.VISIBLE);
                 final String url = "https://fadfadah.net/ksu-gpa/getRevenueCatInformation2";
 
                 Map<String, String> params = new HashMap<String, String>();
@@ -66,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
+                            loginFormView.setVisibility(View.VISIBLE);
+                            loginWarningView.setVisibility(View.VISIBLE);
+                            loginWaitingView.setVisibility(View.INVISIBLE);
+
                             Log.e(" result", (String.valueOf(response)));
                             System.out.println(String.valueOf(response.get("generalStats")));
                         } catch (JSONException e) {
@@ -75,7 +74,9 @@ public class MainActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        loginFormView.setVisibility(View.VISIBLE);
+                        loginWarningView.setVisibility(View.VISIBLE);
+                        loginWaitingView.setVisibility(View.INVISIBLE);
                     }
                 });
             }
@@ -96,6 +97,10 @@ public class MainActivity extends AppCompatActivity {
     private void registerElements() {
         changeLanguageButton = findViewById(R.id.button_change_language);
         loginButton = findViewById(R.id.button_login);
+        loginWarningView = findViewById(R.id.view_login_warning);
+        loginFormView = findViewById(R.id.view_login_form);
+        loginWaitingView = findViewById(R.id.view_login_loading);
+        loginWaitingView.setVisibility(View.INVISIBLE);
     }
 
     public String getCurrentLanguage() {

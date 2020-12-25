@@ -3,6 +3,7 @@ package com.example.revenuecatnotifier;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -38,12 +39,27 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String email = getFromStorage("email");
+        System.out.println(email);
+
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
         registerElements();
         setLayoutDirection();
         registerListeners();
+    }
+
+    private String getFromStorage(String savedDataTitle) {
+        SharedPreferences sharedPreferences = getSharedPreferences("revenue_cat_shared_preferences", MODE_PRIVATE);
+        return sharedPreferences.getString(savedDataTitle, "");
+    }
+
+    private void saveToStorage(String savedDataTitle, String savedDataValue) {
+        SharedPreferences sharedPreferences = getSharedPreferences("revenue_cat_shared_preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(savedDataTitle, savedDataValue);
+        editor.apply();
     }
 
     private void loginRequest(String email, String password) {
@@ -57,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
+                    saveToStorage("email", email);
+                    saveToStorage("password", password);
                     loginFormView.setVisibility(View.VISIBLE);
                     loginWarningView.setVisibility(View.VISIBLE);
                     loginWaitingView.setVisibility(View.INVISIBLE);

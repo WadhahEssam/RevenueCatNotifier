@@ -39,15 +39,25 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String email = getFromStorage("email");
-        System.out.println(email);
-
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
-        setContentView(R.layout.activity_login);
-        registerElements();
-        setLayoutDirection();
-        registerListeners();
+        if (isUserLoggedIn()) {
+            navigateToHomeActivity();
+        } else {
+            setContentView(R.layout.activity_login);
+            getSupportActionBar().hide();
+            registerElements();
+            setLayoutDirection();
+            registerListeners();
+        }
+    }
+
+    private boolean isUserLoggedIn() {
+        String email = getFromStorage("email");
+        return !email.equals("");
+    }
+
+    private void navigateToHomeActivity() {
+        startActivity(new Intent(MainActivity.this, HomeActivity.class));
     }
 
     private String getFromStorage(String savedDataTitle) {
@@ -78,9 +88,9 @@ public class MainActivity extends AppCompatActivity {
                     loginFormView.setVisibility(View.VISIBLE);
                     loginWarningView.setVisibility(View.VISIBLE);
                     loginWaitingView.setVisibility(View.INVISIBLE);
-
                     Log.e(" result", (String.valueOf(response)));
                     System.out.println(String.valueOf(response.get("generalStats")));
+                    navigateToHomeActivity();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

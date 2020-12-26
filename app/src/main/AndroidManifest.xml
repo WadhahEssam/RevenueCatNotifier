@@ -14,8 +14,10 @@
         android:theme="@style/Theme.RevenueCatNotifier">
         <activity
             android:name=".HomeActivity"
-            android:label="Home"
-            android:parentActivityName=".MainActivity" />
+            android:label="Home" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="Login" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

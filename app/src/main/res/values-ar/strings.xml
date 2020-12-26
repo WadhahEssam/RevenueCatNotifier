@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">RevenueCat Notifier</string>
-    <string name="api_url">https://fadfadah.net/ksu-gpa/getRevenueCatInformation2</string>
     <string name="other_language">English</string>
     <string name="login">تسجيل دخول</string>
     <string name="login_warning">التطبيق ليس مصرح من الشركة الأم, استخدامه على مسؤوليتك الشخصية</string>

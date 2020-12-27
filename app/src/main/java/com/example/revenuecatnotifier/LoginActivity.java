@@ -158,7 +158,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void switchLanguage() {
+    private void switchLanguage() {
         Locale myLocale = new Locale(getCurrentLanguage());
         Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();

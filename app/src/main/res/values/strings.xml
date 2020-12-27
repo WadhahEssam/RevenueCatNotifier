@@ -9,4 +9,6 @@
     <string name="login_password">Password</string>
     <string name="login_loading">Please wait until we finish gathering data</string>
     <string name="login_error_empty_fields">Please fill email and password</string>
+
+    <string name="logout">Logout</string>
 </resources>

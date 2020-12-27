@@ -8,4 +8,6 @@
     <string name="login_password">كلمة المرور</string>
     <string name="login_loading">الرجاء الإنتظار لجمع البيانات</string>
     <string name="login_error_empty_fields">رجاء قم بتعبئة جميع الحقول</string>
+
+    <string name="logout">تسجيل الخروج</string>
 </resources>

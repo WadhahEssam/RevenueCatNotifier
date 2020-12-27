@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -7,38 +8,45 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_home_header_section"
-        android:orientation="vertical"
-        android:gravity="center">
-d
+        android:gravity="center"
+        android:orientation="vertical">
+
         <ImageView
-            android:layout_marginTop="45dp"
-            android:layout_marginBottom="30dp"
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:src="@drawable/revenue_cat_logo" />
+            android:layout_marginTop="45dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/revenue_cat_logo"
+            tools:ignore="ContentDescription" />
+
+        <include layout="@layout/stats_section" />
+
 
     </LinearLayout>
 
     <RelativeLayout
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="10dp"
+        android:layout_alignParentBottom="true"
+        android:background="#F4F4F4"
         android:paddingHorizontal="15dp"
-        android:background="#F4F4F4">
+        android:paddingVertical="10dp">
+
         <TextView
-            android:layout_alignParentStart="true"
             android:id="@+id/button_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/logout" />
+            android:layout_alignParentStart="true"
+            android:text="@string/logout"
+            android:theme="@style/Regular" />
 
         <TextView
-            android:layout_alignParentEnd="true"
             android:id="@+id/button_home_switch_langauge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/other_language" />
+            android:layout_alignParentEnd="true"
+            android:text="@string/other_language"
+            android:theme="@style/Regular" />
     </RelativeLayout>
 
 

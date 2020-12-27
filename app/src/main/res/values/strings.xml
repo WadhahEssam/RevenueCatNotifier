@@ -11,4 +11,10 @@
     <string name="login_error_empty_fields">Please fill email and password</string>
 
     <string name="logout">Logout</string>
+    <string name="trails">Trails</string>
+    <string name="subscriptions">Subscriptions</string>
+    <string name="mrr">MRR</string>
+    <string name="revenue">Revenue</string>
+    <string name="active_users">Active Users</string>
+    <string name="installs">Installs</string>
 </resources>

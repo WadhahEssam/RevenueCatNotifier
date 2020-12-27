@@ -10,4 +10,10 @@
     <string name="login_error_empty_fields">رجاء قم بتعبئة جميع الحقول</string>
 
     <string name="logout">تسجيل الخروج</string>
+    <string name="trails">فترة تجريبية</string>
+    <string name="subscriptions">الاشتراكات</string>
+    <string name="mrr">الدخل المقدر</string>
+    <string name="revenue">الدخل</string>
+    <string name="active_users">المستخدمين النشطين</string>
+    <string name="installs">التحميلات</string>
 </resources>

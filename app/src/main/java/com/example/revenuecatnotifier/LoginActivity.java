@@ -84,15 +84,10 @@ public class LoginActivity extends AppCompatActivity {
         CustomRequest.request(LoginActivity.this, Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                try {
-                    saveToStorage("email", email);
-                    saveToStorage("password", password);
-                    Log.e(" result", (String.valueOf(response)));
-                    System.out.println(String.valueOf(response.get("generalStats")));
-                    navigateToHomeActivity();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                saveToStorage("email", email);
+                saveToStorage("password", password);
+                saveToStorage("data", response.toString());
+                navigateToHomeActivity();
             }
         }, new Response.ErrorListener() {
             @Override

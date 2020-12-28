@@ -13,12 +13,25 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.json.JSONObject;
+
 import java.util.Locale;
 import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity {
     private TextView logoutButton;
     private TextView switchLanguageButton;
+    private TextView trailsValue;
+    private TextView subscriptionsValue;
+    private TextView mRRValue;
+    private TextView revenueValue;
+    private TextView activeUsersValue;
+    private TextView installsValue;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +41,8 @@ public class HomeActivity extends AppCompatActivity {
         registerElements();
         registerListeners();
         setLayoutDirection();
+        JsonObject data = JsonParser.parseString(getFromStorage("data")).getAsJsonObject();
+        fillGeneralStats(data.get("generalStats").getAsJsonArray());
     }
 
     @Override
@@ -35,9 +50,45 @@ public class HomeActivity extends AppCompatActivity {
         // do nothing
     }
 
+    private void fillGeneralStats(JsonArray generalStats) {
+        System.out.println(generalStats.get(0).getAsJsonObject().get("Active Trials").getAsString());
+        String activeTrails = generalStats.get(0).getAsJsonObject().get("Active Trials").getAsString();
+        String activeSubscriptions = generalStats.get(1).getAsJsonObject().get("Active Subscriptions").getAsString();
+        String mRR = generalStats.get(2).getAsJsonObject().get("MRR").getAsString();
+        String revenue = generalStats.get(3).getAsJsonObject().get("Revenue").getAsString();
+        String installs = generalStats.get(4).getAsJsonObject().get("Installs").getAsString();
+        String activeUsers = generalStats.get(5).getAsJsonObject().get("Active Users").getAsString();
+
+        trailsValue.setText(activeTrails);
+        subscriptionsValue.setText(activeSubscriptions);
+        mRRValue.setText(mRR);
+        revenueValue.setText(revenue);
+        installsValue.setText(installs);
+        activeUsersValue.setText(activeUsers);
+    }
+
+    private String getFromStorage(String savedDataTitle) {
+        SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.shared_preferences_name), MODE_PRIVATE);
+        return sharedPreferences.getString(savedDataTitle, "");
+    }
+
+    private void saveToStorage(String savedDataTitle, String savedDataValue) {
+        SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.shared_preferences_name), MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(savedDataTitle, savedDataValue);
+        editor.apply();
+    }
+
     private void registerElements() {
         logoutButton = findViewById(R.id.button_logout);
         switchLanguageButton = findViewById(R.id.button_home_switch_langauge);
+        trailsValue = findViewById(R.id.text_stats_trails_body);
+        subscriptionsValue = findViewById(R.id.text_stats_subscriptions_body);
+        mRRValue = findViewById(R.id.text_stats_mrr_body);
+        subscriptionsValue = findViewById(R.id.text_stats_subscriptions_body);
+        revenueValue = findViewById(R.id.text_stats_revenue_body);
+        activeUsersValue = findViewById(R.id.text_stats_active_users_body);
+        installsValue = findViewById(R.id.text_stats_installs_body);
     }
 
     private void registerListeners() {

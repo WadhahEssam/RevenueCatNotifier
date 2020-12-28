@@ -41,8 +41,7 @@ public class HomeActivity extends AppCompatActivity {
         registerElements();
         registerListeners();
         setLayoutDirection();
-        JsonObject data = JsonParser.parseString(getFromStorage("data")).getAsJsonObject();
-        fillGeneralStats(data.get("generalStats").getAsJsonArray());
+        fillData();
     }
 
     @Override
@@ -50,8 +49,17 @@ public class HomeActivity extends AppCompatActivity {
         // do nothing
     }
 
-    private void fillGeneralStats(JsonArray generalStats) {
-        System.out.println(generalStats.get(0).getAsJsonObject().get("Active Trials").getAsString());
+    private void fillData() {
+        fillGeneralStats();
+    }
+
+    private JsonObject getData() {
+        return JsonParser.parseString(getFromStorage("data")).getAsJsonObject();
+    }
+
+    private void fillGeneralStats() {
+        JsonArray generalStats = getData().get("generalStats").getAsJsonArray();
+
         String activeTrails = generalStats.get(0).getAsJsonObject().get("Active Trials").getAsString();
         String activeSubscriptions = generalStats.get(1).getAsJsonObject().get("Active Subscriptions").getAsString();
         String mRR = generalStats.get(2).getAsJsonObject().get("MRR").getAsString();

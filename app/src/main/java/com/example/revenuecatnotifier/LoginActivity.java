@@ -131,6 +131,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void setLayoutDirection() {
+        if (getFromStorage("language").equals("")) {
+            saveToStorage("language", getCurrentLanguage());
+        }
+        if (getFromStorage("language").equals("ar") && getResources().getString(R.string.other_language).equals("عربي")) {
+            switchLanguage();
+            return;
+        }
+        if (getFromStorage("language").equals("en") && getResources().getString(R.string.other_language).equals("English")) {
+            switchLanguage();
+            return;
+        }
         getWindow().getDecorView().setLayoutDirection(getCurrentLanguage().equals("ar") ? View.LAYOUT_DIRECTION_LTR : View.LAYOUT_DIRECTION_RTL);
     }
 
@@ -154,6 +165,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void switchLanguage() {
+        saveToStorage("language", getCurrentLanguage());
         Locale myLocale = new Locale(getCurrentLanguage());
         Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();

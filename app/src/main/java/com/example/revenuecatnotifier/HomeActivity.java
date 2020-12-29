@@ -51,6 +51,24 @@ public class HomeActivity extends AppCompatActivity {
 
     private void fillData() {
         fillGeneralStats();
+        fillTransactions();
+    }
+
+    private void fillTransactions() {
+        JsonArray transactionsJson = getData().get("transactions").getAsJsonArray();
+        Transaction[] transactions = new Transaction[transactionsJson.size()];
+
+        for (int i = 0; i < transactionsJson.size(); i++) {
+            String userID = transactionsJson.get(i).getAsJsonObject().get("userID").toString();
+            String product = transactionsJson.get(i).getAsJsonObject().get("product").toString();
+            String revenue = transactionsJson.get(i).getAsJsonObject().get("revenue").toString();
+            String purchased = transactionsJson.get(i).getAsJsonObject().get("purchased").toString();
+            String expiration = transactionsJson.get(i).getAsJsonObject().get("expiration").toString();
+            Boolean isTrail = transactionsJson.get(i).getAsJsonObject().get("userID").getAsBoolean();
+
+            transactions[i] = new Transaction(userID, product, revenue, purchased, expiration, isTrail);
+            System.out.println(transactions[i].toString());
+        }
     }
 
     private JsonObject getData() {

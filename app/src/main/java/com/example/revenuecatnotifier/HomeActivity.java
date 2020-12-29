@@ -71,6 +71,7 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         transactionsRecyclerView.setAdapter(new TransactionsAdapter(transactions));
+        transactionsRecyclerView.setNestedScrollingEnabled(false);
     }
 
     private JsonObject getData() {

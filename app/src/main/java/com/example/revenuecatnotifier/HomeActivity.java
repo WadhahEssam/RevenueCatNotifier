@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -32,6 +33,7 @@ public class HomeActivity extends AppCompatActivity {
     private TextView revenueValue;
     private TextView activeUsersValue;
     private TextView installsValue;
+    private RecyclerView transactionsRecyclerView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,10 +67,10 @@ public class HomeActivity extends AppCompatActivity {
             String purchased = transactionsJson.get(i).getAsJsonObject().get("purchased").toString();
             String expiration = transactionsJson.get(i).getAsJsonObject().get("expiration").toString();
             Boolean isTrail = transactionsJson.get(i).getAsJsonObject().get("userID").getAsBoolean();
-
             transactions[i] = new Transaction(userID, product, revenue, purchased, expiration, isTrail);
-            System.out.println(transactions[i].toString());
         }
+
+        transactionsRecyclerView.setAdapter(new TransactionsAdapter(transactions));
     }
 
     private JsonObject getData() {
@@ -115,6 +117,7 @@ public class HomeActivity extends AppCompatActivity {
         revenueValue = findViewById(R.id.text_stats_revenue_body);
         activeUsersValue = findViewById(R.id.text_stats_active_users_body);
         installsValue = findViewById(R.id.text_stats_installs_body);
+        transactionsRecyclerView = findViewById(R.id.recycler_view_transactions);
     }
 
     private void registerListeners() {

@@ -17,4 +17,5 @@
     <string name="revenue">Revenue</string>
     <string name="active_users">Active Users</string>
     <string name="installs">Installs</string>
+    <string name="transactions">Transactions</string>
 </resources>

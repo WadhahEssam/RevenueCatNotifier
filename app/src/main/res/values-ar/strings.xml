@@ -16,4 +16,5 @@
     <string name="revenue">الدخل</string>
     <string name="active_users">المستخدمين النشطين</string>
     <string name="installs">التحميلات</string>
+    <string name="transactions">العمليات</string>
 </resources>

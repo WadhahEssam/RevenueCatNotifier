@@ -10,4 +10,6 @@
 
     <color name="primary">#DE5D62</color>
     <color name="primaryVariant">#B43F44</color>
+
+    <color name="gold">#FFCB5A</color>
 </resources>

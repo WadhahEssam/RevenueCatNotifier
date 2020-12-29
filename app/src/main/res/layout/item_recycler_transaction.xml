@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_project"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginTop="8dp"
+    android:outlineSpotShadowColor="#737373"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="13dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/image_view_transaction_icon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="14dp"
+            android:src="@drawable/dollars" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_view_transaction_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/image_view_transaction_icon"
+                android:layout_toEndOf="@id/image_view_transaction_icon"
+                android:text="Active"
+                android:textColor="@color/gold"
+                android:textSize="20dp"
+                android:theme="@style/Bold" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_view_transaction_uid_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/image_view_transaction_icon"
+                    android:layout_toEndOf="@id/image_view_transaction_icon"
+                    android:text="UID"
+                    android:textColor="#B7B7B7"
+                    android:theme="@style/SemiBold" />
+
+                <TextView
+                    android:id="@+id/text_view_transaction_uid_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/image_view_transaction_icon"
+                    android:layout_marginStart="4dp"
+                    android:layout_toEndOf="@id/image_view_transaction_icon"
+                    android:text="j2b0oTDUZg-X721amDeoF"
+                    android:textColor="#D6D6D6"
+                    android:textSize="12dp"
+                    android:theme="@style/Regular" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_view_transaction_sku_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/image_view_transaction_icon"
+                    android:layout_toEndOf="@id/image_view_transaction_icon"
+                    android:text="SKU"
+                    android:textColor="#B7B7B7"
+                    android:theme="@style/SemiBold" />
+
+                <TextView
+                    android:id="@+id/text_view_transaction_sku_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/image_view_transaction_icon"
+                    android:layout_marginStart="4dp"
+                    android:layout_toEndOf="@id/image_view_transaction_icon"
+                    android:text="fadfadah_199_1w_3d0"
+                    android:textColor="#D6D6D6"
+                    android:textSize="12dp"
+                    android:theme="@style/Regular" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2.14$"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/gold"
+                android:textSize="21dp"
+                android:theme="@style/Bold" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

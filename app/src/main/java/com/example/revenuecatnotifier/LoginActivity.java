@@ -108,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                System.out.println(error.getMessage());
                 loginError("Please make sure to fill your email and password");
             }
         });

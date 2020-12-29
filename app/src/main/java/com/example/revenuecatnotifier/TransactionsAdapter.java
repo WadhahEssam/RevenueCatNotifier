@@ -1,5 +1,6 @@
 package com.example.revenuecatnotifier;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,8 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.w3c.dom.Text;
 
 public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapter.TransactionViewHolder> {
 
@@ -21,20 +25,15 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
     @NonNull
     @Override
     public TransactionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // putting attache to root = true, will not work.
-        // you will always write this line of code when you want to specify the layout you want the recycler view to render.
-        // in a simpler way, it links the ViewHolder to the actual item layout we created.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler_transaction, parent, false);
         return new TransactionViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TransactionViewHolder holder, int position) {
-        // here we are going to set the values that we need to the item layout.
-        holder.bind(transactions[position], position);
+        holder.bind(transactions[position], position, transactions.length);
     }
 
-    // this is the first method that is going to be called.
     @Override
     public int getItemCount() {
         return transactions.length;
@@ -42,39 +41,100 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
 
     static class TransactionViewHolder extends RecyclerView.ViewHolder {
 
-//        private TextView titleTextView;
-//        private TextView descriptionTextView;
-//        private ImageView projectImage;
-//        private CardView projectCard;
-//        private final int DEFAULT_MARGIN = 16;
+        private TextView statusTextView;
+        private ImageView transactionIconImageView;
+        private TextView uidTextView;
+        private TextView skuTextView;
+        private TextView transactionAmountTextView;
+        private CardView transactionCard;
+
+        private final int DEFAULT_HOR_MARGIN = 50;
+        private final int DEFAULT_VER_MARGIN = 16;
 
         public TransactionViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            // linking the xml elements to a variables.
-            // you will need to call the findViewById from the itemView variable.
-//            projectImage = itemView.findViewById(R.id.image_portfolio);
-//            titleTextView = itemView.findViewById(R.id.text_view_portfolio_title);
-//            descriptionTextView = itemView.findViewById(R.id.text_view_portfolio_description);
-//            projectCard = itemView.findViewById(R.id.card_project);
+            registerElements();
         }
 
-        // this functions is called bind by convention.
-        public void bind(Transaction transaction, int position) {
-            // here we are going to set all the texts and images and variables inside of our item layout
-//            titleTextView.setText(project.getTitle());
-//            descriptionTextView.setText(project.getDescription());
-//            projectImage.setImageResource(project.getImage());
-//
-//            ViewGroup.MarginLayoutParams layoutParams =
-//                    (ViewGroup.MarginLayoutParams) projectCard.getLayoutParams();
-//
-//            if (position == 0) {
-//                layoutParams.setMargins(DEFAULT_MARGIN, DEFAULT_MARGIN * 2, DEFAULT_MARGIN, DEFAULT_MARGIN);
-//            } else {
-//                layoutParams.setMargins(DEFAULT_MARGIN, 0, DEFAULT_MARGIN, DEFAULT_MARGIN);
-//            }
-//            projectCard.requestLayout();
+        public void bind(Transaction transaction, int position, int transactionsLength) {
+            statusTextView.setText(getTransactionStatus(transaction));
+            transactionAmountTextView.setText(getTransactionAmount(transaction));
+            uidTextView.setText(transaction.getUid());
+            skuTextView.setText(transaction.getSku());
+            transactionIconImageView.setImageResource(getTransactionIconResource(transaction));
+
+            colorize(getTransactionColor(transaction));
+
+            // fixing margins
+            ViewGroup.MarginLayoutParams layoutParams =
+                    (ViewGroup.MarginLayoutParams) transactionCard.getLayoutParams();
+            if (position == transactionsLength - 1) {
+                layoutParams.setMargins(DEFAULT_HOR_MARGIN, DEFAULT_VER_MARGIN, DEFAULT_HOR_MARGIN, 100);
+            } else {
+                layoutParams.setMargins(DEFAULT_HOR_MARGIN, DEFAULT_VER_MARGIN, DEFAULT_HOR_MARGIN, DEFAULT_VER_MARGIN);
+            }
+            transactionCard.requestLayout();
+        }
+
+        private void registerElements() {
+            statusTextView = itemView.findViewById(R.id.text_view_transaction_status);
+            transactionIconImageView = itemView.findViewById(R.id.image_view_transaction_icon);
+            uidTextView = itemView.findViewById(R.id.text_view_transaction_uid_value);
+            skuTextView = itemView.findViewById(R.id.text_view_transaction_sku_value);
+            transactionAmountTextView = itemView.findViewById(R.id.text_view_transaction_amount);
+            transactionCard = itemView.findViewById(R.id.card_transaction);
+        }
+
+        private String getTransactionColor(Transaction transaction) {
+            if (transaction.getRevenue().equals("Trial")) {
+                return "#759EC4";
+            }
+            if (transaction.getRevenue().equals("$0.00")) {
+                return "#759EC4";
+            }
+            if (transaction.getIsRenewal() == true) {
+                return "#45D5C1";
+            }
+            return "#FFCA3C";
+        }
+
+        private void colorize(String color) {
+            statusTextView.setTextColor(Color.parseColor(color));
+            transactionAmountTextView.setTextColor(Color.parseColor(color));
+        }
+
+        private int getTransactionIconResource(Transaction transaction) {
+            if (transaction.getRevenue().equals("Trial")) {
+                return R.drawable.free_2;
+            }
+            if (transaction.getRevenue().equals("$0.00")) {
+                return R.drawable.free_2;
+            }
+            if (transaction.getIsRenewal() == true) {
+                return R.drawable.refresh_3;
+            }
+            return R.drawable.dollars;
+        }
+
+        private String getTransactionAmount(Transaction transaction) {
+            if (transaction.getRevenue().equals("Trial")) {
+                return "$0.00";
+            }
+            return transaction.getRevenue();
+        }
+
+        private String getTransactionStatus(Transaction transaction) {
+            if (transaction.getRevenue().equals("Trial")) {
+
+                return "Trial";
+            }
+            if (transaction.getRevenue().equals("$0.00")) {
+                return "Grace Period";
+            }
+            if (transaction.getIsRenewal() == true) {
+                return "Renewal";
+            }
+            return transaction.getRevenue();
         }
     }
 }

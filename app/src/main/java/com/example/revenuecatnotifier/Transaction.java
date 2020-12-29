@@ -6,15 +6,15 @@ public class Transaction {
     private String revenue;
     private String purchased;
     private String expiration;
-    private Boolean isTrail;
+    private Boolean isRenewal;
 
-    public Transaction(String uid, String sku, String revenue, String purchased, String expiration, Boolean isTrail) {
+    public Transaction(String uid, String sku, String revenue, String purchased, String expiration, Boolean renewal) {
         this.uid = uid;
         this.sku = sku;
         this.revenue = revenue;
         this.purchased = purchased;
         this.expiration = expiration;
-        this.isTrail = isTrail;
+        this.isRenewal = renewal;
     }
 
     public String getUid() {
@@ -57,12 +57,12 @@ public class Transaction {
         this.expiration = expiration;
     }
 
-    public Boolean getTrail() {
-        return isTrail;
+    public Boolean getIsRenewal() {
+        return isRenewal;
     }
 
-    public void setTrail(Boolean trail) {
-        isTrail = trail;
+    public void setTrail(Boolean renewal) {
+        isRenewal = renewal;
     }
 
     @Override
@@ -73,7 +73,7 @@ public class Transaction {
                 ", revenue='" + revenue + '\'' +
                 ", purchased='" + purchased + '\'' +
                 ", expiration='" + expiration + '\'' +
-                ", isTrail=" + isTrail +
+                ", renewal=" + isRenewal +
                 '}';
     }
 }

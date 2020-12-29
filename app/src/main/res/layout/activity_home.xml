@@ -35,8 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/layout_header"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="12dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="16dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -57,7 +57,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_transactions"
-            android:paddingBottom="80dp"
+            android:paddingBottom="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/layout_transactions_section_title"

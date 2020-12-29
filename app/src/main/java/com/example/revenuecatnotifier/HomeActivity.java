@@ -61,13 +61,13 @@ public class HomeActivity extends AppCompatActivity {
         Transaction[] transactions = new Transaction[transactionsJson.size()];
 
         for (int i = 0; i < transactionsJson.size(); i++) {
-            String userID = transactionsJson.get(i).getAsJsonObject().get("userID").toString();
-            String product = transactionsJson.get(i).getAsJsonObject().get("product").toString();
-            String revenue = transactionsJson.get(i).getAsJsonObject().get("revenue").toString();
-            String purchased = transactionsJson.get(i).getAsJsonObject().get("purchased").toString();
-            String expiration = transactionsJson.get(i).getAsJsonObject().get("expiration").toString();
-            Boolean isTrail = transactionsJson.get(i).getAsJsonObject().get("userID").getAsBoolean();
-            transactions[i] = new Transaction(userID, product, revenue, purchased, expiration, isTrail);
+            String userID = transactionsJson.get(i).getAsJsonObject().get("userID").getAsString();
+            String product = transactionsJson.get(i).getAsJsonObject().get("product").getAsString();
+            String revenue = transactionsJson.get(i).getAsJsonObject().get("revenue").getAsString();
+            String purchased = transactionsJson.get(i).getAsJsonObject().get("purchased").getAsString();
+            String expiration = transactionsJson.get(i).getAsJsonObject().get("expiration").getAsString();
+            Boolean renewal = transactionsJson.get(i).getAsJsonObject().get("renewal").getAsBoolean();
+            transactions[i] = new Transaction(userID, product, revenue, purchased, expiration, renewal);
         }
 
         transactionsRecyclerView.setAdapter(new TransactionsAdapter(transactions));

@@ -50,6 +50,9 @@ public class HomeActivity extends AppCompatActivity {
         setLayoutDirection();
         fillData();
 
+        Intent intent = new Intent(this, APIBackgroundService.class);
+        startService(intent);
+        System.out.println("hey there I am working");
 
         changeStatusBarColor("#F4F4F4");
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);

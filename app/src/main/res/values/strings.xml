@@ -18,4 +18,5 @@
     <string name="active_users">Active Users</string>
     <string name="installs">Installs</string>
     <string name="transactions">Transactions</string>
+    <string name="load_more">See More</string>
 </resources>

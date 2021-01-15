@@ -1,5 +1,9 @@
 package com.example.revenuecatnotifier;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -20,6 +24,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -59,7 +65,6 @@ public class HomeActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, APIBackgroundService.class);
         startService(intent);
-        System.out.println("hey there I am working");
 
         changeStatusBarColor("#F4F4F4");
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -225,5 +230,9 @@ public class HomeActivity extends AppCompatActivity {
         fillData();
         System.out.println("filling Data");
         super.onRestart();
+    }
+
+    public void seeMoreTransactions(View view) {
+
     }
 }

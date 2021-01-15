@@ -1,5 +1,6 @@
 package com.example.revenuecatnotifier;
 
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +9,9 @@ import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -26,6 +30,7 @@ import java.util.Map;
 public class APIBackgroundService extends Service {
 
     private static final String TAG = APIBackgroundService.class.getSimpleName();
+    private static int NUMBER_OF_MILLI_SECONDS_TO_RUN = 1000 * 60 * 30;
 
     @Override
     public void onCreate() {
@@ -64,7 +69,6 @@ public class APIBackgroundService extends Service {
         protected Object doInBackground(Object[] objects) {
             Log.i(TAG, "doInBackground, Thread " + Thread.currentThread().getName());
 
-            int NUMBER_OF_MILLI_SECONDS_TO_RUN = 1000 * 60 * 1;
             int secondsCounter = 0; // run every
             runTheTask();
             while (true) {
@@ -109,6 +113,10 @@ public class APIBackgroundService extends Service {
                     Boolean hasNewTransactions = JsonParser.parseString(response.toString()).getAsJsonObject().get("hasNewTransactions").getAsBoolean();
                     Log.i(TAG, response.toString());
                     Log.i(TAG, getFromStorage("lastCheck"));
+
+                    if (hasNewTransactions) {
+                        sendLocalNotification("New Transactions", "You have received new transactions");
+                    }
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -159,11 +167,26 @@ public class APIBackgroundService extends Service {
             editor.apply();
         }
 
+        private void sendLocalNotification (String title, String body) {
+            Intent intent = new Intent(APIBackgroundService.this, HomeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            PendingIntent pendingIntent = PendingIntent.getActivity(APIBackgroundService.this, 0, intent, 0);
+
+            NotificationCompat.Builder b = new NotificationCompat.Builder(APIBackgroundService.this, "transactionNotification");
+            b.setContentTitle(title);
+            b.setContentText(body);
+            b.setSmallIcon(R.drawable.ic_launcher_foreground);
+            b.setAutoCancel(true);
+            b.setContentIntent(pendingIntent);
+
+            NotificationManagerCompat manager = NotificationManagerCompat.from(APIBackgroundService.this);
+            manager.notify(12, b.build());
+        }
+
         @Override
         protected void onProgressUpdate(Object[] values) {
             super.onProgressUpdate(values);
             Log.i(TAG, "onProgressUpdate, Counter:" + values[0]+  ", Thread " + Thread.currentThread().getName());
-            Toast.makeText(APIBackgroundService.this, values[0].toString(), Toast.LENGTH_SHORT).show();;
         }
 
         @Override

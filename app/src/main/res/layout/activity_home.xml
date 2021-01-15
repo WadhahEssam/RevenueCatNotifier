@@ -64,8 +64,8 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
-        <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <androidx.cardview.widget.CardView
+            android:onClick="seeMoreTransactions"
             android:id="@+id/button_see_more"
             android:layout_width="match_parent"
             android:layout_height="40dp"

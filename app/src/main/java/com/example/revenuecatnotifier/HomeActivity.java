@@ -30,6 +30,8 @@ import com.google.gson.JsonParser;
 
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -42,6 +44,7 @@ public class HomeActivity extends AppCompatActivity {
     private TextView revenueValue;
     private TextView activeUsersValue;
     private TextView installsValue;
+    private TextView lastCheckText;
     private RecyclerView transactionsRecyclerView;
 
     @Override
@@ -79,6 +82,11 @@ public class HomeActivity extends AppCompatActivity {
     private void fillData() {
         fillGeneralStats();
         fillTransactions();
+        fillLastCheck();
+    }
+
+    private void fillLastCheck() {
+        lastCheckText.setText(getFromStorage("lastCheck"));
     }
 
     private void fillTransactions() {
@@ -144,6 +152,7 @@ public class HomeActivity extends AppCompatActivity {
         activeUsersValue = findViewById(R.id.text_stats_active_users_body);
         installsValue = findViewById(R.id.text_stats_installs_body);
         transactionsRecyclerView = findViewById(R.id.recycler_view_transactions);
+        lastCheckText = findViewById(R.id.text_last_check);
     }
 
     private void registerListeners() {

@@ -60,7 +60,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
             statusTextView.setText(getTransactionStatus(transaction));
             transactionAmountTextView.setText(getTransactionAmount(transaction));
             uidTextView.setText(transaction.getUid());
-            skuTextView.setText(transaction.getSku());
+            skuTextView.setText(transaction.getSku().substring(0, transaction.getSku().length() > 30 ? 30 : transaction.getSku().length()));
             transactionIconImageView.setImageResource(getTransactionIconResource(transaction));
 
             colorize(getTransactionColor(transaction));
@@ -134,7 +134,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
             if (transaction.getIsRenewal() == true) {
                 return "Renewal";
             }
-            return transaction.getRevenue();
+            return "Active";
         }
     }
 }

@@ -18,6 +18,8 @@ import com.google.gson.JsonParser;
 
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -103,8 +105,10 @@ public class APIBackgroundService extends Service {
                 @Override
                 public void onResponse(JSONObject response) {
                     saveToStorage("data", response.toString());
+                    saveToStorage("lastCheck", new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a").format(new Date()));
                     Boolean hasNewTransactions = JsonParser.parseString(response.toString()).getAsJsonObject().get("hasNewTransactions").getAsBoolean();
-                    Log.i(TAG, hasNewTransactions + "");
+                    Log.i(TAG, response.toString());
+                    Log.i(TAG, getFromStorage("lastCheck"));
                 }
             }, new Response.ErrorListener() {
                 @Override

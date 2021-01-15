@@ -80,6 +80,13 @@
                 android:theme="@style/Regular" />
 
             <TextView
+                android:id="@+id/text_last_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:theme="@style/Regular" />
+
+            <TextView
                 android:id="@+id/button_home_switch_langauge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

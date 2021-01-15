@@ -27,6 +27,8 @@ import com.android.volley.VolleyError;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -103,6 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                 saveToStorage("email", email);
                 saveToStorage("password", password);
                 saveToStorage("data", response.toString());
+                saveToStorage("lastCheck", new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a").format(new Date()));
                 navigateToHomeActivity();
             }
         }, new Response.ErrorListener() {

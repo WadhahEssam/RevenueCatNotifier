@@ -12,6 +12,9 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import org.json.JSONObject;
 
@@ -25,13 +28,13 @@ public class APIBackgroundService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        new APIAsyncTask().execute();
         Log.i(TAG, "on Create, Thread " + Thread.currentThread().getName());
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i(TAG, "on Start, Thread " + Thread.currentThread().getName());
-        new APIAsyncTask().execute();
         return START_STICKY;
     }
 
@@ -89,14 +92,19 @@ public class APIBackgroundService extends Service {
             Map<String, String> params = new HashMap<String, String>();
             params.put("email", email);
             params.put("password", password);
+            params.put("hash", getHash());
+
+            Log.i(TAG, getHash());
+
 
             final String url = getResources().getString(R.string.api_url);
 
             CustomRequest.request(APIBackgroundService.this, Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
-                    Log.i(TAG, response.toString());
                     saveToStorage("data", response.toString());
+                    Boolean hasNewTransactions = JsonParser.parseString(response.toString()).getAsJsonObject().get("hasNewTransactions").getAsBoolean();
+                    Log.i(TAG, hasNewTransactions + "");
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -106,6 +114,34 @@ public class APIBackgroundService extends Service {
             });
         }
 
+        private void injectNewStats(String response) {
+            JsonArray newStats = getData().get("generalData").getAsJsonArray();
+
+
+            for (int i = 0; i < newStats.size(); i++) {
+                System.out.println(newStats.get(i).toString());
+            }
+        }
+
+        private String getHash() {
+            JsonArray transactionsJson = getData().get("transactions").getAsJsonArray();
+            Transaction[] transactions = new Transaction[transactionsJson.size()];
+
+            String hash = "";
+            for (int i = 0; i < 3; i++) {
+                String userID = transactionsJson.get(i).getAsJsonObject().get("userID").getAsString();
+                String product = transactionsJson.get(i).getAsJsonObject().get("product").getAsString();
+                String revenue = transactionsJson.get(i).getAsJsonObject().get("revenue").getAsString();
+
+                hash += userID + product + revenue;
+            }
+
+            return hash;
+        }
+
+        private JsonObject getData() {
+            return JsonParser.parseString(getFromStorage("data")).getAsJsonObject();
+        }
 
         private String getFromStorage(String savedDataTitle) {
             SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.shared_preferences_name), MODE_PRIVATE);

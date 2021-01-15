@@ -1,6 +1,9 @@
 package com.example.revenuecatnotifier;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -8,6 +11,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -198,5 +202,19 @@ public class HomeActivity extends AppCompatActivity {
         Intent refresh = new Intent(this, MainActivity.class);
         finish();
         startActivity(refresh);
+    }
+
+    @Override
+    protected void onResume() {
+        fillData();
+        System.out.println("filling Data");
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        fillData();
+        System.out.println("filling Data");
+        super.onRestart();
     }
 }
